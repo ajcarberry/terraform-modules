@@ -26,7 +26,7 @@ resource "aws_instance" "debian_ec2" {
   subnet_id                   = "${var.subnet_id}"
   vpc_security_group_ids      = ["${var.security_groups}"]
   associate_public_ip_address = "${var.public_ip}"
-  tags {
+  tags = {
     Name          = "${var.instance_count > 1 ? format("%s-%d", var.name, count.index+1) : var.name}"
     Environment   = "${var.env}"
     VPC           = "${var.vpc_name}"
