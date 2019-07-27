@@ -1,21 +1,11 @@
 # Debian EC2
 # =================================
-# DNS Suffix
-# =================================
-variable "dns_suffix" {
-	description = "dns suffix per environment."
-	default = {
-		stage = "-stage"
-		prod  = ""
-	}
-}
-
 # AMI Identification
 # =================================
 data "aws_ami" "debian" {
 
   most_recent = true
-  owners = ["self"] #default profile
+  owners = ["self"]
 
   filter {
     name   = "name"
@@ -56,16 +46,4 @@ resource "aws_instance" "debian_ec2" {
   lifecycle {
     ignore_changes = ["ami"]
   }
-}
-
-# R53 DNS
-# =================================
-resource "aws_route53_record" "a_record" {
-  count     = "${var.instance_count}"
-  provider  = "aws.master"
-  zone_id   = "ZSM8H062M1J3G"
-  name      = "${var.instance_count > 1 ? format("%s-%d", "${var.name}${lookup(var.dns_suffix, var.env)}", count.index+1) : "${var.name}${lookup(var.dns_suffix, var.env)}"}"
-  type      = "CNAME"
-  ttl       = "300"
-  records   = ["${element(aws_instance.debian_ec2.*.public_dns, count.index)}"]
 }
