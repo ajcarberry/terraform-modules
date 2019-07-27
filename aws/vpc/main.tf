@@ -7,7 +7,7 @@ resource "aws_vpc" "vpc_default" {
   enable_dns_support   = true
 
   tags = {
-    Name = "${var.name}_${var.env}"
+    Name = "${var.env}_${var.name}"
     Environment  = "${var.env}"
     Automation = "terraform"
   }
