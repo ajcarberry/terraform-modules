@@ -20,14 +20,14 @@ data "aws_ami" "debian" {
 # EC2 Deployment
 # =================================
 resource "aws_instance" "debian_ec2" {
-  count                       = "${var.instance_count}"
+  count                       = "1"
   ami                         = "${data.aws_ami.debian.id}"
   instance_type               = "${var.instance_type}"
   subnet_id                   = "${var.subnet_id}"
   vpc_security_group_ids      = "${var.security_groups}"
   associate_public_ip_address = "${var.public_ip}"
   tags = {
-    Name          = "${var.instance_count > 1 ? format("%s-%d", var.name, count.index+1) : var.name}"
+    Name          = "${var.name}"
     Environment   = "${var.env}"
     VPC           = "${var.vpc_name}"
     Automation    = "terraform"
