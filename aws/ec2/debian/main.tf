@@ -35,10 +35,10 @@ resource "aws_instance" "debian_ec2" {
   }
 
 	provisioner "local-exec" {
-    command = "${var.playbook == "" ? "sleep 60" : "sleep 90; ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ${self.public_ip}, ${var.playbook} --extra-vars 'env=${var.env}' --vault-password-file ../../ansible/vault_pass.txt"}"
+    command = "${var.playbook == "" ? "sleep 60" : "sleep 90; ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ${self.public_ip}, ${var.playbook} --extra-vars 'env=${var.env}' --vault-password-file ${var.vault_passwd_file}"}"
   }
 	provisioner "local-exec" {
-		command = "${var.destroy == "" ? "sleep 10" : "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ${self.public_ip}, ${var.destroy} --extra-vars 'env=${var.env}' --vault-password-file ../../ansible/vault_pass.txt"}"
+		command = "${var.destroy == "" ? "sleep 10" : "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ${self.public_ip}, ${var.destroy} --extra-vars 'env=${var.env}' --vault-password-file ${var.vault_passwd_file}"}"
 		when = "destroy"
 	}
 

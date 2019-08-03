@@ -13,3 +13,4 @@ variable "instance_count"   {}
 variable "security_groups"  {type = "list"}
 variable "playbook"         {default = ""}
 variable "destroy"          {default = ""}
+variable "vault_passwd_file"  {default = ".vault_pass.txt"}
