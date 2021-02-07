@@ -7,7 +7,7 @@ resource "aws_route_table" "route_dmz" {
   vpc_id = var.vpc
 
   tags = {
-    Name = "route_dmz_${var.availability}_zone_${var.env}"
+    Name = "route_dmz_${var.availability_zone}_${var.env}"
     Environment  = var.env
     VPC  = var.vpc_name
     Automation = "terraform"
