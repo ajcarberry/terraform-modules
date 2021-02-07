@@ -7,9 +7,9 @@ resource "aws_route_table" "route_dmz" {
   vpc_id = var.vpc
 
   tags = {
-    Name = "route_dmz_var.availability_zone_var.env"
-    Environment  = "var.env"
-    VPC  = "var.vpc_name"
+    Name = route_dmz_var.availability_zone_var.env
+    Environment  = var.env
+    VPC  = var.vpc_name
     Automation = "terraform"
   }
 }
@@ -32,11 +32,11 @@ resource "aws_subnet" "subnet_dmz" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "dmz_var.cidr_var.availability_zone"
-    Environment  = "var.env"
-    VPC  = "var.vpc_name"
+    Name = dmz_var.cidr_var.availability_zone
+    Environment  = var.env
+    VPC  = var.vpc_name
     Automation = "terraform"
-    Extra = "var.tag"
+    Extra = var.tag
   }
 }
 

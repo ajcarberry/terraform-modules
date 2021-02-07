@@ -1,3 +1,4 @@
+# =================================
 # Gateway
 # =================================
 # NAT Gateway
@@ -23,9 +24,9 @@ resource "aws_route_table" "route_nat" {
   vpc_id = var.vpc
 
   tags = {
-    Name = "route_nat_var.availability_zone_var.env"
-    Environment  = "var.env"
-    VPC  = "var.vpc_name"
+    Name = route_nat_var.availability_zone_var.env
+    Environment  = var.env
+    VPC  = var.vpc_name
     Automation = "terraform"
   }
 }
@@ -48,11 +49,11 @@ resource "aws_subnet" "subnet_nat" {
   map_public_ip_on_launch = false
 
   tags = {
-    Name = "nat_var.cidr_var.availability_zone"
-    Environment  = "var.env"
-    VPC  = "var.vpc_name"
+    Name = nat_var.cidr_var.availability_zone
+    Environment  = var.env
+    VPC  = var.vpc_name
     Automation = "terraform"
-    Extra = "var.tag"
+    Extra = var.tag
   }
 }
 
