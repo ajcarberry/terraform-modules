@@ -24,7 +24,7 @@ resource "aws_route_table" "route_nat" {
   vpc_id = var.vpc
 
   tags = {
-    Name = route_nat_var.availability_zone_var.env
+    Name = "route_nat_${var.availability_zone}_${var.env}"
     Environment  = var.env
     VPC  = var.vpc_name
     Automation = "terraform"
@@ -49,7 +49,7 @@ resource "aws_subnet" "subnet_nat" {
   map_public_ip_on_launch = false
 
   tags = {
-    Name = nat_var.cidr_var.availability_zone
+    Name = "nat_${var.cidr}_${var.availability_zone}"
     Environment  = var.env
     VPC  = var.vpc_name
     Automation = "terraform"

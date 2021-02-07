@@ -7,7 +7,7 @@ resource "aws_vpc" "vpc_default" {
   enable_dns_support   = true
 
   tags = {
-    Name = var.env_var.name
+    Name = "${var.env}_${var.name}"
     Environment  = var.env
     Automation = "terraform"
   }
@@ -22,7 +22,7 @@ resource "aws_internet_gateway" "internet_gw_default" {
     vpc_id = aws_vpc.vpc_default.id
 
     tags = {
-      Name = var.name_internet_gw_var.env
+      Name = "${var.name}_internet_gw_${var.env}"
       Environment  = var.env
       VPC  = aws_vpc.vpc_default.tags.Name
       Automation = "terraform"
